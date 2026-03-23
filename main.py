@@ -58,7 +58,7 @@ async def check_url(session: aiohttp.ClientSession, url:str,
             return False, f"HTTP Error {e.status}: {e.message}"
 
         except aiohttp.ClientConnectorError as e:
-            return False, f"Connection Error {e.status}: {e.message}"
+            return False, f"Connection Error: {e}"
 
         except asyncio.TimeoutError:
             return False, f"Timeout Error"
