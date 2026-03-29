@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "domain_monitor_service"
+version = "0.1.0"
+description = "Высокопроизводительный асинхронный сервис мониторинга доменов"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "Veronika Melcova", email = "your.email@example.com"}
+]
+
+dependencies = [
+    "aiohttp>=3.8.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "aioresponses>=0.7.0",
+    "flake8>=6.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+monitor-run = "monitor.main:run_service"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/__init__.py", "tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+precision = 2
+
+[tool.ruff]
+line-length = 79
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
